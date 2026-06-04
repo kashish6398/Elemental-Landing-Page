@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #060713;
+  --color-foreground: #F3F4F6;
+  --color-card-bg: #0D0E25;
+  --color-card-border: #1F2244;
+  --color-accent-cyan: #00F2FE;
+  --color-accent-purple: #B927FC;
+  --color-accent-blue: #3B82F6;
+  --color-accent-orange: #FF6A00;
+  
+  --font-sans: 'Outfit', var(--font-geist-sans), sans-serif;
+}
+
+:root {
+  --background: #060713;
+  --foreground: #F3F4F6;
+}
+
+html,
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+  max-width: 100%;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #060713;
+}
+::-webkit-scrollbar-thumb {
+  background: #1F2244;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3B82F6;
+}
+
+/* Glowing animations */
+@keyframes border-glow {
+  0%, 100% {
+    border-color: rgba(31, 34, 68, 0.6);
+    box-shadow: 0 0 10px rgba(0, 242, 254, 0.05);
+  }
+  50% {
+    border-color: rgba(59, 130, 246, 0.5);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+  }
+}
+
+.animate-border-glow {
+  animation: border-glow 6s infinite ease-in-out;
+}
+
+/* Background Mesh / Grid Overlay */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+}
+
+.bg-radial-gradient {
+  background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 60%);
+}
+
+.bg-radial-mesh {
+  background: 
+    radial-gradient(circle at 10% 20%, rgba(185, 39, 252, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(0, 242, 254, 0.05) 0%, transparent 45%);
+}
+
+/* Gradient text */
+.text-glow-gradient {
+  background: linear-gradient(135deg, #00F2FE 0%, #B927FC 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-orange-gradient {
+  background: linear-gradient(135deg, #FF8C00 0%, #FF2A6D 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Card hover glow */
+.hover-card-glow {
+  transition: all 0.3s ease;
+}
+.hover-card-glow:hover {
+  box-shadow: 0 10px 30px -10px rgba(0, 242, 254, 0.15);
+}
+
+/* 
+  PERFORMANCE-OPTIMIZED FUTURISTIC BACKDROP:
+  1. Static SVG Grain Noise Overlay (No layout redraws)
+*/
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.018;
+  pointer-events: none;
+}
+
+/* 
+  2. Aurora GPU-friendly flows:
+  Uses translate3d and scale exclusively, keeping animations on the compositor thread 
+  for buttery-smooth rendering with zero main thread layout recalculations.
+*/
+@keyframes aurora-flow-primary {
+  0% {
+    transform: translate3d(0px, 0px, 0px) scale(1) rotate(0deg);
+  }
+  33% {
+    transform: translate3d(30px, 45px, 0px) scale(1.1) rotate(120deg);
+  }
+  66% {
+    transform: translate3d(-20px, 20px, 0px) scale(0.9) rotate(240deg);
+  }
+  100% {
+    transform: translate3d(0px, 0px, 0px) scale(1) rotate(360deg);
+  }
+}
+
+@keyframes aurora-flow-secondary {
+  0% {
+    transform: translate3d(0px, 0px, 0px) scale(1) rotate(360deg);
+  }
+  50% {
+    transform: translate3d(-40px, -30px, 0px) scale(1.15) rotate(180deg);
+  }
+  100% {
+    transform: translate3d(0px, 0px, 0px) scale(1) rotate(0deg);
+  }
+}
+
+.animate-aurora-blob-1 {
+  animation: aurora-flow-primary 25s infinite ease-in-out;
+}
+
+.animate-aurora-blob-2 {
+  animation: aurora-flow-secondary 30s infinite ease-in-out;
+}
+
